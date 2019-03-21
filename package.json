@@ -1,0 +1,29 @@
+{
+	"name": "intlocalize",
+	"version": "1.0.0",
+	"description": "react internationalization library",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "rm -rf ./dist && tsc",
+		"test": "jest --watch",
+		"test:once": "jest"
+	},
+	"homepage": "https://github.com/xeuus/intlocalize",
+	"author": "Aryan Alikhani",
+	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/xeuus/intlocalize.git"
+	},
+	"bugs": {
+		"url": "https://github.com/xeuus/intlocalize/issues"
+	},
+	"devDependencies": {
+		"@types/node": "^11.11.3",
+		"@types/react": "^16.8.8",
+		"jest": "^24.5.0",
+		"react": "^16.8.4",
+		"typescript": "^3.3.3333"
+	}
+}

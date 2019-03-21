@@ -1,2 +1,1 @@
-# ssrstore
 # intlocalize
