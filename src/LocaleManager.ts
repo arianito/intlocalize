@@ -6,9 +6,8 @@ export class LocaleManager {
 	private static _locales = {};
 	private static _messages = {};
 
-	static Initalize(locale: string, fallback: string){
+	static Initalize(locale: string){
 		this.CurrentLocale = locale;
-		this._fallback = fallback;
 	}
 
 	static LoadLocale(localeName, localeData){
