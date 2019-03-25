@@ -4,7 +4,7 @@ const utils = require('loader-utils');
 const locale = require('./PseudoParser');
 const parser = require('./ParseTranslationBlock');
 
-const regex = /((__\('(.*?)'([),]))|(__\("(.*?)"([),]))|(__="(.*?)"([ \/])))/g;
+const regex = /((__\('(.*?)'([),]))|(__\("(.*?)"([),]))|(__="(.*?)"[ \/]?))/g;
 const localeRegex = /(LocaleManager\.LoadLocale)\('(.*?)',/g;
 
 let initialize = false;
@@ -32,6 +32,20 @@ function saveLocale(name, locale) {
 	const content = str + JSON.stringify(locale, null, 4) + ';';
 	fs.writeFileSync(path.join(localesPath, name + extension), content)
 }
+function testMatch(input = '') {
+	if (input.length < 6)
+		return null;
+	input = input.trim().substr(4);
+	let j = 0;
+	for (let i = input.length - 1; i >= 0; i--) {
+		if (input.charAt(i) === "'" || input.charAt(i) === '"') {
+			j = i;
+			break;
+		}
+	}
+	return input.substring(0, j).trim()
+}
+
 
 export default function loader(source) {
 
@@ -63,7 +77,7 @@ export default function loader(source) {
 			m = localeRegex.exec(line);
 			if (m) {
 				const key = m[2];
-				if (!locales.includes(key)) {
+				if (key && !locales.includes(key)) {
 					locales.push(key);
 				}
 			}
@@ -73,9 +87,12 @@ export default function loader(source) {
 		do {
 			match = regex.exec(line);
 			if (match) {
-				const x = locale.ParsePseudo(match[3], parser.ParseTranslationBlock);
-				if (!keys.includes(x.key)) {
-					keys.push(x.key);
+				const key = testMatch(match[0]);
+				if(key) {
+					const x = locale.ParsePseudo(key, parser.ParseTranslationBlock);
+					if (!keys.includes(x.key)) {
+						keys.push(x.key);
+					}
 				}
 			}
 		} while (match);
