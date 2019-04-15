@@ -11,7 +11,10 @@
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"jsx": "react",
-        "lib": [
+		"baseUrl": "src",
+		"paths": {
+		},
+		"lib": [
             "dom",
             "es2015",
             "es2016.array.include",

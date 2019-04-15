@@ -143,21 +143,14 @@ export function PersianMonthLength(jy, jm) {
 	return 29
 }
 
-export function GregorianMonthLength(jy: number, jm: number) {
-	if (jm <= 6) {
-		return 31
-	}
-	if (jm <= 11) {
-		return 30
-	}
-	if (LeapYear(jy)) {
-		return 30
-	}
-	return 29
+
+export function GregorianMonthLength(gy: number, gm: number) {
+	return new Date(gy, gm, 0).getDate();
 }
+
 export function ToGregorian(jy, jm, jd) {
 	const a = localToGregorian(jy, jm, jd);
-	return new Date(a.gy, a.gm, a.gd, 0, 0, 0, 0)
+	return new Date(a.gy, a.gm-1, a.gd, 0, 0, 0, 0)
 }
 
 export function FromGregorian(gy, gm, gd) {

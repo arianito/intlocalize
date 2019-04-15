@@ -15,6 +15,8 @@ export const NumberFormatter: IFormatter = (name, value, options, translator, va
 	const bytes = options['bytes'];
 	const balance = options['balance'];
 
+
+
 	if (currency) {
 		const cur = (currency === true ? CURRENCIES[LocaleManager.CurrentLocaleConfig['currency']] : (CURRENCIES[currency] || null));
 		const fx = (round && round !== true) ? round : cur ? cur.portion : 2;
@@ -26,13 +28,17 @@ export const NumberFormatter: IFormatter = (name, value, options, translator, va
 		let tempPrice = price;
 		let symbol = cur.units[0].symbol;
 
+
 		if (shrink) {
 			for (let i = 0; i < cur.units.length; i++) {
 				let a = cur.units[i];
-				if(tempPrice / a.portion < 10)
-					break;
-				tempPrice /= a.portion;
 				symbol = a.symbol;
+				if(tempPrice / a.portion < 10){
+					symbol = cur.units[i-1].symbol;
+					break;
+				}
+
+				tempPrice /= a.portion;
 			}
 			tempPrice = Round(tempPrice, fx);
 		}
@@ -41,17 +47,19 @@ export const NumberFormatter: IFormatter = (name, value, options, translator, va
 		let op = '';
 		let s = 0;
 		const m = nm.length - 1;
+		const deci = LocaleManager.CurrentLocaleConfig['delimiters']['decimal'];
+		const thz = LocaleManager.CurrentLocaleConfig['delimiters']['thousands'];
 		for (let i = m; i > -1; i--) {
 			s++;
 			const l = m - i;
 			const c = nm.charAt(i);
 			if (c === '.') {
 				s = 0;
-				op = LocaleManager.CurrentLocaleConfig['delimiters']['decimal'] + op
+				op =  deci + op
 			} else {
 				op = nm[i] + op;
-				if (s >= 3 && i !== 0 && l > fx) {
-					op = LocaleManager.CurrentLocaleConfig['delimiters']['thousands'] + op;
+				if (s >= 3 && i !== 0 && l >= fx) {
+					op = thz + op;
 					s = 0
 				}
 			}
@@ -59,6 +67,7 @@ export const NumberFormatter: IFormatter = (name, value, options, translator, va
 		if (balance) {
 			op = (sign > 0 ? '+' : sign < 0 ? '-' : '') + op
 		}
+
 			return op + ' ' + symbol
 	} else if (percent) {
 		let fx = (round && round !== true) ? round : 0;

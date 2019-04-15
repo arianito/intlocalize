@@ -5,7 +5,7 @@ export const CURRENCIES =  {
 		"units": [
 			{
 				"portion": 1,
-				"plural": "USD"
+				"symbol": "USD"
 			},
 			{
 				"portion": 1000,
