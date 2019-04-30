@@ -33,7 +33,7 @@ export const NumberFormatter: IFormatter = (name, value, options, translator, va
 			for (let i = 0; i < cur.units.length; i++) {
 				let a = cur.units[i];
 				symbol = a.symbol;
-				if(tempPrice / a.portion < 10){
+				if(tempPrice / a.portion < 10 && i > 0){
 					symbol = cur.units[i-1].symbol;
 					break;
 				}

@@ -15,5 +15,12 @@ test('test currency formatter', function() {
 	expect(__('{0, number, @currency @shrink}', 6922786002)).toEqual('6,922.79 M');
 
 
+	expect(__('{0, number, @currency @shrink}', {
+	0: 1231231123122312312312,
+		currency: 'IRR'
+	})).toEqual('123,123,112,312.2 میلیارد تومان');
+
+
+
 
 });

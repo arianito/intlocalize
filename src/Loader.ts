@@ -8,8 +8,8 @@ const regex = /((__\('(.*?)'([),]))|(__\("(.*?)"([),]))|(__="(.*?)"[ \/]?))/g;
 const localeRegex = /(LocaleManager\.LoadLocale)\('(.*?)',/g;
 
 let initialize = false;
-let locales = [];
-let keys = [];
+export let locales = [];
+export let keys = [];
 let localesPath = null;
 let extension = null;
 
@@ -32,6 +32,8 @@ function saveLocale(name, locale) {
 	const content = str + JSON.stringify(locale, null, 4) + ';';
 	fs.writeFileSync(path.join(localesPath, name + extension), content)
 }
+
+
 function testMatch(input = '') {
 	if (input.length < 6)
 		return null;
@@ -47,28 +49,7 @@ function testMatch(input = '') {
 }
 
 
-export default function loader(source) {
-
-	if (!initialize) {
-		const options = Object.assign(
-			{},
-			utils.getOptions(this),
-		);
-		localesPath = options['localesPath'];
-		extension = options['extension'] || '.ts';
-
-		this._compiler.hooks.afterCompile.tap('MyPlugin', function () {
-			locales.forEach(lc => {
-				const locale = readLocale(lc);
-				locale.messages = keys.reduce((output, key) => Object.assign(output, {
-					[key]: locale.messages[key] || key,
-				}), {});
-				saveLocale(lc, locale);
-			})
-		});
-		initialize = true;
-	}
-
+export function extractData(source) {
 	source = source.replace(/^\s*[\r\n]/gm, "");
 	const array = source.split("\n");
 	array.forEach(line => {
@@ -98,4 +79,29 @@ export default function loader(source) {
 		} while (match);
 	});
 	return source;
+}
+export default function loader(source) {
+	if (!initialize) {
+		const options = Object.assign(
+			{},
+			utils.getOptions(this),
+		);
+		localesPath = options['localesPath'];
+		extension = options['extension'] || '.ts';
+
+		this._compiler.hooks.afterCompile.tap('MyPlugin', function () {
+			locales.forEach(lc => {
+				const locale = readLocale(lc);
+				locale.messages = keys.reduce((output, key: string) => {
+					const index = key.indexOf(':') + 1;
+					return Object.assign(output, {
+						[key]: locale.messages[key] || key.substring(index) || '',
+					})
+				}, {});
+				saveLocale(lc, locale);
+			})
+		});
+		initialize = true;
+	}
+	return extractData(source)
 }
