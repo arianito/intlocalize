@@ -71,7 +71,7 @@ export function extractData(source) {
 				const key = testMatch(match[0]);
 				if(key) {
 					const x = locale.ParsePseudo(key, parser.ParseTranslationBlock);
-					if (!keys.includes(x.key)) {
+					if (!keys.includes(x.key) && x.key.length > 3) {
 						keys.push(x.key);
 					}
 				}

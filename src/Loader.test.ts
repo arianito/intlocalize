@@ -6,11 +6,11 @@ test('loader to load files correctly', () =>{
 		LocaleManager.LoadLocale('en', LANG_EN);
 		LocaleManager.LoadLocale('fa', LANG_FA);
 		
-		__('hello world')
+		__('{0}')
+		__('{name}')
 		__('@test:boy')
+		__('@test:joy of night')
   `);
-
-
 
   	let messages = {};
 	locales.forEach(lc => {
