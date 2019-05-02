@@ -7,7 +7,7 @@ test('test intlocalize', () => {
 
 	LocaleManager.LoadLocale('en', LANG_EN);
 	LocaleManager.LoadLocale('fa', LANG_FA);
-	LocaleManager.Initalize('fa');
+	LocaleManager.Initalize('en');
 
 	LocaleManager.LoadMessages({
 		locale: 'fa',
@@ -16,7 +16,11 @@ test('test intlocalize', () => {
 			'hello world': 'busted',
 		},
 	});
-	expect(__('@test:hello world')).toEqual('hello');
-	expect(__('hello world')).toEqual('busted');
+	expect(__('@test:hello world')).toEqual('hello world');
+	expect(__('hello world')).toEqual('hello world');
+
+
+
+	expect(__('{date, date, @relative}', {date: Date.now()})).toBe('')
 
 });

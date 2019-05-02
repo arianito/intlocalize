@@ -14,6 +14,8 @@ function mod(a, b) {
 }
 
 export function dec(d): any[] {
+	if(d < 1000)
+		d = 1000;
 
 	let pt = [];
 	let acc = div(d, 1000);
