@@ -1,6 +1,8 @@
 import {ReplaceString} from "./functions";
 import {LocaleManager} from "./LocaleManager";
-import {ENG_TO_AR, ENG_TO_FA, FA_TO_ENG} from "./defaults";
+import {ENG_TO_AR} from "./defaults/engtoar";
+import {ENG_TO_FA} from "./defaults/engtofa";
+import {FA_TO_ENG} from "./defaults/fatoeng";
 
 
 

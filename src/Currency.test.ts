@@ -1,5 +1,6 @@
 import {LocaleManager} from "./LocaleManager";
-import {LANG_EN, LANG_FA} from "./defaults";
+import {LANG_EN} from "./defaults/en";
+import {LANG_FA} from "./defaults/fa";
 import {__} from "./Translate";
 
 test('test currency formatter', function() {

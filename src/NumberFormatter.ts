@@ -1,7 +1,7 @@
 import {Round} from "./functions";
 import {IFormatter} from "./FormatterInterface";
 import {LocaleManager} from "./LocaleManager";
-import {CURRENCIES} from "./defaults";
+import {CURRENCIES} from "./defaults/currencies";
 
 const bts = ['b', 'kb', 'mb', 'gb', 'tb', 'pb'];
 const units = ['', 'k', 'm', 'b', 't', 'p'];

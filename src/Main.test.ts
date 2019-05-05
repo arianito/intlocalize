@@ -1,6 +1,7 @@
 import {__} from "./Translate";
 import {LocaleManager} from "./LocaleManager";
-import {LANG_EN, LANG_FA} from "./defaults";
+import {LANG_FA} from "./defaults/fa";
+import {LANG_EN} from "./defaults/en";
 
 test('test intlocalize', () => {
 
