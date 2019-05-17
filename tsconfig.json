@@ -1,31 +1,34 @@
 {
-    "compilerOptions": {
-        "outDir": "dist/",
-        "target": "es5",
-        "module": "commonjs",
-		"strict": false,
-		"esModuleInterop": true,
-		"declaration": true,
-		"noImplicitAny": false,
-		"downlevelIteration": true,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"jsx": "react",
-		"baseUrl": "src",
-		"paths": {
-		},
-		"lib": [
-            "dom",
-            "es2015",
-            "es2016.array.include",
-            "es6"
-        ]
-    },
-	"include": [
-		"./src/**/*"
-	],
-    "exclude": [
-        "dist/",
-        "node_modules/"
-    ]
+  "compilerOptions": {
+    "outDir": "dist/",
+    "target": "es5",
+    "module": "commonjs",
+    "strict": false,
+    "esModuleInterop": true,
+    "declaration": true,
+    "noImplicitAny": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016.array.include",
+      "es6"
+    ],
+    "baseUrl": ".",
+    "paths": {}
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "**/*.js",
+    "**/*.d.ts",
+    "test.config.ts",
+    "src/__tests__/",
+    "dist/",
+    "node_modules/"
+  ]
 }

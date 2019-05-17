@@ -1,0 +1,28 @@
+{
+	"extends": "tslint-config-airbnb",
+	"rules": {
+		"type-literal-delimiter": true,
+		"align": false,
+		"variable-name": [
+			true,
+			"ban-keywords",
+			"check-format",
+			"allow-pascal-case"
+		],
+		"semicolon": [
+			true,
+			"always",
+			"ignore-bound-class-methods"
+		],
+		"import-name": [
+			true,
+			{
+				"lodash": "_",
+				"lodash/fp": "_",
+				"react": "React",
+				"react-dom": "ReactDOM",
+				"react-dom/server": "ReactDOMServer"
+			}
+		]
+	}
+}
