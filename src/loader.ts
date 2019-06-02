@@ -5,7 +5,7 @@ const locale = require('./pseudoParser');
 const parser = require('./parseTranslationBlock');
 
 const regex = /((__\('(.*?)'([),]))|(__\("(.*?)"([),]))|(__="(.*?)"[ \/]?))/g;
-const localeRegex = /(LocaleManager\.LoadLocale)\('(.*?)',/g;
+const localeRegex = /(Intlocalize\.loadData)\('(.*?)',/g;
 
 let initialize = false;
 export let locales = [];
@@ -14,8 +14,7 @@ let localesPath = null;
 
 function readLocale(name) {
   try {
-    const read = fs.readFileSync(path.join(localesPath, `${name}.json`))
-      .toString('utf8').trim();
+    const read = fs.readFileSync(path.join(localesPath, `${name}.json`)).toString('utf8');
     return JSON.parse(read);
   } catch (e) {
     return {
