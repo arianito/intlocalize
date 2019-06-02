@@ -11,13 +11,11 @@ let initialize = false;
 export let locales = [];
 export let keys = [];
 let localesPath = null;
-let extension = null;
 
 function readLocale(name) {
   try {
-    let read = fs.readFileSync(path.join(localesPath, name + extension)).toString('utf8').trim();
-    read = read.substr(read.indexOf('{'));
-    read = read.substr(0, read.length - 1);
+    const read = fs.readFileSync(path.join(localesPath, `${name}.json`))
+      .toString('utf8').trim();
     return JSON.parse(read);
   } catch (e) {
     return {
@@ -28,9 +26,8 @@ function readLocale(name) {
 }
 
 function saveLocale(name, locale) {
-  const str = `export const MESSAGES_${name.toUpperCase()} = `;
-  const content = `${str + JSON.stringify(locale, null, 2)};`;
-  fs.writeFileSync(path.join(localesPath, name + extension), content);
+  const content = JSON.stringify(locale, null, 2);
+  fs.writeFileSync(path.join(localesPath, `${name}.json`), content);
 }
 
 function testMatch(x = '') {
@@ -88,7 +85,6 @@ export default function loader(source) {
       utils.getOptions(this),
     );
     localesPath = options['localesPath'];
-    extension = options['extension'] || '.ts';
 
     this._compiler.hooks.afterCompile.tap('MyPlugin', () => {
       locales.forEach((lc) => {
