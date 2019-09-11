@@ -11,6 +11,7 @@ export function numberFormatter(name, v, options) {
   const shrink = options['shrink'];
   const round = options['round'];
   const percent = options['percent'];
+  const noSymbol = options['noSymbol'];
   const eng = options['eng'];
   const bytes = options['bytes'];
   const balance = options['balance'];
@@ -66,7 +67,7 @@ export function numberFormatter(name, v, options) {
       op = (sign > 0 ? '+' : sign < 0 ? '-' : '') + op;
     }
 
-    return `${op} ${symbol}`;
+    return noSymbol ? op : `${op} ${symbol}`;
   }
   if (percent) {
     const fx = (round && round !== true) ? round : 0;
