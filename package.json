@@ -42,7 +42,7 @@
 		"tsconfig-paths-jest": "0.0.1",
 		"typescript": "^3.3.3333",
 		"husky": "^2.3.0",
-		"lint-staged": "^8.1.7",
+		"lint-staged": "^13.1.0",
 		"prettier": "^1.17.1",
 		"tslint": "^5.16.0",
 		"tslint-config-airbnb": "^5.11.1",
